@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="global.css" />
+
+    <!-- Page-specific CSS -->
+    <link rel="stylesheet" href="register.css" />
+
+    <title>Register - Microblog Network</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="form-section">
+          <h1>Register</h1>
+          <p>Please enter your details to create an account</p>
+          <form id="register">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="Full Name" />
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" minlength="3" placeholder="Username" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" minlength="3" placeholder="Password" />
+            </div>
+            <button id="registerButton" type="submit">Sign Up</button>
+          </form>
+        </div>
+        <div class="image-section">
+          <img src="Photos/MicroblogNetwork_Background.png" alt="Descriptive alt text">
+        </div>
+      </div>
+    </main>
+
+    <script>
+      "use strict";
+      document.addEventListener("DOMContentLoaded", () => {
+        const registerButton = document.querySelector("#registerButton");
+
+        registerButton.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          let usernameCreated = document.querySelector("#username").value;
+          let passwordCreated = document.querySelector("#password").value;
+          let fullNameCreated = document.querySelector("#fullName").value;
+
+          let createNewUser = {
+            fullName: fullNameCreated,
+            username: usernameCreated,
+            password: passwordCreated,
+          };
+
+          let requestInit = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(createNewUser),
+          };
+
+          function saveNewData() {
+            fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users", requestInit)
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+
+          saveNewData();
+        });
+      });
+    </script>
+  </body>
+</html>
+
+

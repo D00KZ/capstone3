@@ -1,0 +1,65 @@
+### Base URL
+http://microbloglite.us-east-2.elasticbeanstalk.com
+
+### Step 1) Register or create new user
+POST http://microbloglite.us-east-2.elasticbeanstalk.com/api/users
+Content-Type: application/json
+
+{
+  "username": "Chris",
+  "fullName": "Christopher Dookie",
+  "password": "JamBall"
+}
+
+
+### Step 2) Login
+POST http://microbloglite.us-east-2.elasticbeanstalk.com/auth/login
+Content-Type: application/json
+
+{
+  "username": "Chris",
+  "password": "JamBall"
+}
+
+### Step 3) GET Users
+GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+### Step 4) GET One User
+GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/Chris
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+### Step 5) Create a Post
+POST http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+{
+    "text": "Hello World"
+}
+
+### Step 6) GET Posts
+GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+### Step 7) DELETE Post
+DELETE http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+
+### Step 8) Update User
+PUT http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/Chris
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+{
+"fullName" : "Christopher Dookie",
+"bio": "Hi"
+}
+### Step 9) Add Like
+POST http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+
+### Step 10) Delete/Remove Like
+DELETE http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
