@@ -1,100 +1,74 @@
-/* Reset some basic styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Global styles */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(45deg, #4b2d8f, #8e44ad);
+  background: linear-gradient(135deg, #ff6fd8 0%, #3813c2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  margin: 0;
 }
 
 .container {
-  display: flex;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   width: 100%;
-  overflow: hidden;
+  max-width: 400px;
+  text-align: center;
 }
 
-.form-section {
-  padding: 2rem;
-  width: 50%;
+.form-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
-h1 {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-p {
-  margin-bottom: 2rem;
-  color: #666;
+.form-section p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #ddd;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
   text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #ddd;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 1em;
+  border: none;
   border-radius: 5px;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-  border-color: #8e44ad;
   outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-button {
+#registerButton {
   width: 100%;
-  padding: 0.75rem;
-  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  padding: 12px;
+  font-size: 1.2em;
   color: #fff;
+  background: linear-gradient(135deg, #ff6fd8 0%, #3813c2 100%);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background: linear-gradient(45deg, #ee0979, #ff6a00);
-}
-
-.image-section {
-  width: 50%;
-  background: url('your-photo.jpg') no-repeat center center;
-  background-size: cover;
-}
-
-.image-section img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+#registerButton:hover {
+  background: linear-gradient(135deg, #3813c2 0%, #ff6fd8 100%);
 }

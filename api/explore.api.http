@@ -23,34 +23,34 @@ Content-Type: application/json
 
 ### Step 3) GET Users
 GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 ### Step 4) GET One User
+
 GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/Chris
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 ### Step 5) Create a Post
 POST http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 {
     "text": "Hello World"
 }
 
 ### Step 6) GET Posts
-GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+GET http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 ### Step 7) DELETE Post
-DELETE http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+DELETE http://microbloglite.us-east-2.elasticbeanstalk.com/api
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 
 ### Step 8) Update User
 PUT http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/Chris
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 {
 "fullName" : "Christopher Dookie",
@@ -58,8 +58,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNoc
 }
 ### Step 9) Add Like
 POST http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724/like
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
 
 ### Step 10) Delete/Remove Like
 DELETE http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/6675a240fbf13c2cc0eaf724/like
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5MDgyNzY0LCJleHAiOjE3MTkxNjkxNjR9.98VcpHQT8K2YCGeD0PWs8hjdgIz5UCgYDnf4HB_BtpQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNocmlzIiwiaWF0IjoxNzE5NDIxMjU5LCJleHAiOjE3MTk1MDc2NTl9.AmfECplxBMt46Rtu8YDkpZ-Hf8eqVpWpxB5gmhyziEM
