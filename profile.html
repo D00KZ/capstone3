@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../global.css" />
+  <link rel="stylesheet" href="profile.css" />
+  <title>Profile - Microblog Network</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #272729;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    header h1 {
+      color: #d7dadc;
+      margin: 0;
+    }
+    nav a {
+      color: #d7dadc;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      flex-grow: 1;
+    }
+    #profileContainer {
+      background: #272729;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .profileHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profileHeader img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+    }
+    .profileHeader div {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .fullNameContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    .username {
+      font-size: 16px;
+      color: #a3a3a3;
+    }
+    .profileInfo {
+      display: flex;
+      flex-direction: column;
+    }
+    .profileInfo div {
+      margin-bottom: 10px;
+    }
+    .post {
+      background: #1a1a1b;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    footer {
+      background-color: #272729;
+      color: #d7dadc;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+    }
+    .sidebar {
+      background: #272729;
+      border-radius: 8px;
+      padding: 20px;
+      width: 300px;
+      margin-right: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar .avatar {
+      background-color: #1a1a1b;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sidebar .avatar img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+    .sidebar .usernameSidebarDisplay {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .sidebar .totalLikes, .sidebar .totalPosts {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .sidebar .settings {
+      margin-top: 20px;
+      width: 100%;
+    }
+    .sidebar .settings button {
+      background-color: #d7dadc; /* Updated to new color */
+      border: none;
+      color: #1a1a1b;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .sidebar .settings button:last-child {
+      margin-bottom: 0;
+    }
+    .form-input {
+      margin-bottom: 10px;
+      display: none;
+    }
+    .form-input input, .form-input textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #343536;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+    }
+    .form-input textarea {
+      resize: none;
+    }
+    .confirm-button {
+      display: none;
+      background-color: #d7dadc;
+      border: none;
+      color: #1a1a1b;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Microblog Network</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="sidebar" id="sidebar">
+      <div class="avatar"><img src="https://via.placeholder.com/60" alt="Avatar" /></div>
+      <div class="usernameSidebarDisplay">Test</div>
+      <div class="totalLikes">Total Likes: <span id="totalLikesCount">0</span></div>
+      <div class="totalPosts">Total Posts: <span id="totalPostsCount">0</span></div>
+      <div class="settings">
+        <button id="editProfileButton">Edit Profile</button>
+        <button>Add Social Link</button>
+        <button class="confirm-button" id="confirmButton">Confirm</button>
+      </div>
+    </div>
+    <div id="profileContainer">
+      <div class="profileHeader">
+        <div class="fullNameContainer">
+        </div>
+      </div>
+      <div class="profileInfo">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Microblog Network</p>
+  </footer>
+
+  <script src="../account/auth.js"></script>
+  <script>
+    window.onload = function () {
+      const loginData = getLoginData();
+      const token = loginData.token;
+      const apiBaseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com/api";
+
+      const profileContainer = document.querySelector("#profileContainer");
+      const sidebar = document.querySelector("#sidebar");
+      const totalLikesCount = document.querySelector("#totalLikesCount");
+      const totalPostsCount = document.querySelector("#totalPostsCount");
+
+      const editProfileButton = document.getElementById("editProfileButton");
+      const confirmButton = document.getElementById("confirmButton");
+
+      function loadingUserProfile() {
+        fetch(`${apiBaseURL}/users/${loginData.username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((user) => {
+            // Profile Header
+            const profileHeader = document.createElement("div");
+            profileHeader.className = "profileHeader";
+
+            const profilePic = document.createElement("img");
+            profilePic.src = user.profilePicUrl || "https://via.placeholder.com/80"; // Replace with actual profile pic URL
+            profileHeader.appendChild(profilePic);
+
+            const fullNameContainer = document.createElement("div");
+            fullNameContainer.className = "fullNameContainer";
+
+            const profileName = document.createElement("div");
+            profileName.className = "fullName";
+            profileName.innerHTML = user.fullName;
+            fullNameContainer.appendChild(profileName);
+
+            const username = document.createElement("div");
+            username.className = "username";
+            username.innerHTML = `@${user.username}`;
+            fullNameContainer.appendChild(username);
+
+            profileHeader.appendChild(fullNameContainer);
+
+            // Append header to profile container
+            profileContainer.appendChild(profileHeader);
+
+            // Profile Info
+            const profileInfo = document.createElement("div");
+            profileInfo.className = "profileInfo";
+
+            const bioDiv = document.createElement("div");
+            bioDiv.innerHTML = user.bio || "No bio available.";
+            profileInfo.appendChild(bioDiv);
+
+            profileContainer.appendChild(profileInfo);
+
+            // Add editable fields
+            const fullNameInput = document.createElement("input");
+            fullNameInput.className = "form-input";
+            fullNameInput.value = user.fullName;
+            fullNameInput.id = "editFullName";
+            profileContainer.appendChild(fullNameInput);
+
+            const usernameInput = document.createElement("input");
+            usernameInput.className = "form-input";
+            usernameInput.value = user.username;
+            usernameInput.id = "editUsername";
+            profileContainer.appendChild(usernameInput);
+
+            const bioTextarea = document.createElement("textarea");
+            bioTextarea.className = "form-input";
+            bioTextarea.value = user.bio || "";
+            bioTextarea.id = "editBio";
+            profileContainer.appendChild(bioTextarea);
+
+            editProfileButton.addEventListener("click", () => {
+              fullNameInput.style.display = "block";
+              usernameInput.style.display = "block";
+              bioTextarea.style.display = "block";
+              confirmButton.style.display = "block";
+            });
+
+            confirmButton.addEventListener("click", () => {
+              const updatedFullName = document.getElementById("editFullName").value;
+              const updatedUsername = document.getElementById("editUsername").value;
+              const updatedBio = document.getElementById("editBio").value;
+
+              const updatedData = {
+                fullName: updatedFullName,
+                username: updatedUsername,
+                bio: updatedBio,
+              };
+
+              fetch(`${apiBaseURL}/users/${loginData.username}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(updatedData),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                  }
+                  return response.json();
+                })
+                .then((updatedUser) => {
+                  profileName.innerHTML = updatedUser.fullName;
+                  username.innerHTML = `@${updatedUser.username}`;
+                  bioDiv.innerHTML = updatedUser.bio;
+
+                  fullNameInput.style.display = "none";
+                  usernameInput.style.display = "none";
+                  bioTextarea.style.display = "none";
+                  confirmButton.style.display = "none";
+                })
+                .catch((error) => {
+                  console.error("Error updating profile:", error);
+                });
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+            profileContainer.innerHTML = "<p>Error loading profile data.</p>";
+          });
+      }
+
+      function getUserTotalLikes() {
+        fetch(`${apiBaseURL}/users/${loginData.username}/likes`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((likes) => {
+            totalLikesCount.innerText = likes.length;
+          })
+          .catch((error) => {
+            console.error("Error fetching user likes:", error);
+            totalLikesCount.innerText = "Error";
+          });
+      }
+
+      function getUserTotalPosts() {
+        fetch(`${apiBaseURL}/users/${loginData.username}/posts`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((posts) => {
+            totalPostsCount.innerText = posts.length;
+          })
+          .catch((error) => {
+            console.error("Error fetching user posts:", error);
+            totalPostsCount.innerText = "Error";
+          });
+      }
+
+      function getLoginData() {
+        const loginJSON = window.localStorage.getItem("login-data");
+        return JSON.parse(loginJSON) || {};
+      }
+
+      loadingUserProfile();
+      getUserTotalLikes();
+      getUserTotalPosts();
+    };
+  </script>
+</body>
+</html>

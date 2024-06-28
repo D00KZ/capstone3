@@ -4,11 +4,106 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global CSS (CSS rules you want applied to all pages) -->
+    <link rel="stylesheet" href="./global.css" />
 
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="register.css" />
 
     <title>Register - Microblog Network</title>
+    <style>
+      /* global.css */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #e91e63, #2196f3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background-color: #1a1a1a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      h1 {
+        color: white;
+      }
+
+      p,
+      a {
+        color: #bbb;
+        margin: 10px 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: #64b5f6;
+      }
+
+      a:hover {
+        color: #90caf9;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #64b5f6;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #64b5f6;
+        border-radius: 5px;
+        background-color: #64b5f6;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #90caf9;
+      }
+
+      #togglePassword {
+        background-color: #333;
+        border: 1px solid #64b5f6;
+        color: #fff;
+        padding: 10px;
+        margin-left: 10px;
+      }
+
+      #togglePassword:hover {
+        background-color: #555;
+      }
+
+      /* register.css */
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-group {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <main>
