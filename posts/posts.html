@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../global.css" />
-  <link rel="stylesheet" href="posts.css" />
   <title>Home - Microblog Network</title>
   <!-- Run BEFORE page is finished loading (before window.onload): -->
   <script src="../account/auth.js"></script>
@@ -16,26 +15,75 @@
   </script>
   <style>
     /* Basic Reset */
-    body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-      margin: 0;
-      padding: 0;
-      font-weight: normal;
-    }
-
     body {
       font-family: Arial, sans-serif;
       background-color: #1a1a1b;
       color: #d7dadc;
-      line-height: 1.6;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal overflow */
     }
-
     header {
       background-color: #272729;
-      color: #fff;
       padding: 10px 20px;
-      font-size: 1.5em;
-      text-align: center;
-      border-bottom: 1px solid #343536;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    header h1 {
+      color: #d7dadc;
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      color: #d7dadc;
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-center {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    .search-bar input {
+      padding: 8px;
+      border: 1px solid #343536;
+      border-radius: 4px;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+      margin-right: 10px;
+    }
+    .search-bar button {
+      padding: 8px 16px;
+      background-color: #d7dadc;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #1a1a1b;
+      font-weight: bold;
+    }
+    .search-bar button:hover {
+      background-color: #818384;
     }
 
     main {
@@ -44,6 +92,9 @@
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
+      flex-grow: 1;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     footer {
@@ -52,6 +103,8 @@
       text-align: center;
       padding: 10px;
       border-top: 1px solid #343536;
+      width: 100%;
+      bottom: 0;
     }
 
     .post {
@@ -178,8 +231,8 @@
     }
 
     .modal-content .create-post-button {
-      background-color: #d7dadc;
-      color: #1a1a1b;
+      background-color: #1da1f2;
+      color: #fff;
       border: none;
       padding: 10px 20px;
       cursor: pointer;
@@ -187,7 +240,7 @@
     }
 
     .modal-content .create-post-button:hover {
-      background-color: #818384;
+      background-color: #1a8cd8;
     }
 
     .close {
@@ -221,7 +274,7 @@
       margin-left: 20px;
       flex: 1;
       max-width: 300px;
-      min-height: 30rem;
+      height: 50vh; /* Adjusted height to be half of the page */
       position: relative;
     }
 
@@ -271,10 +324,56 @@
     .sidebar ul li a:hover {
       text-decoration: underline;
     }
+
+    /* Styles for the Tweet Form */
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .user-avatar {
+      border-radius: 50%;
+      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+    }
+    .tweet-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .tweet-option {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .tweet-option svg {
+      fill: #d7dadc;
+    }
+    .tweet-option:hover svg {
+      fill: #1da1f2;
+    }
   </style>
 </head>
 <body>
-  <header>Microblog Network</header>
+  <header>
+    <div class="header-left">
+      <h1><a href="../posts/posts.html" style="color: inherit; text-decoration: none;">Microblog Network</a></h1>
+    </div>
+    <div class="header-center">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search posts by username...">
+        <button id="searchButton">Search</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <nav>
+        <a href="../posts/index.html">Home</a>
+        <a href="../profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <div style="flex: 3;">
@@ -294,17 +393,28 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <form id="createPostForm">
-        <h2>Post</h2>
-        <label for="postText">Post Text:</label>
+        <h2>Compose new Tweet</h2>
+        <div class="user-info">
+          <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar" />
+          <span class="username">@username</span>
+        </div>
         <textarea
           id="postText"
           name="postText"
           rows="4"
           cols="50"
-          placeholder="Enter your post text here..."
+          placeholder="What's happening?"
         ></textarea>
-        <br />
-        <button type="submit" class="create-post-button">Post</button>
+        <div class="tweet-options">
+          <button type="button" class="tweet-option">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2a10 10 0 11-8.485 15.515A10 10 0 0112 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 4.5a1 1 0 011-1h2a1 1 0 010 2h-1v1h1a1 1 0 010 2h-1v1h1a1 1 0 010 2h-2a1 1 0 01-1-1v-5zm1 1v-1h1v1h-1zm1 4v-1h-1v1h1z"></path></svg>
+          </button>
+          <button type="button" class="tweet-option">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2a10 10 0 11-8.485 15.515A10 10 0 0112 2zm0 2a8 8 0 100 16 8 8 0 000-16zm0 3a3 3 0 11-2.83 2.002L7.057 7.91A3 3 0 1112 7zM5.9 7.9a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"></path></svg>
+          </button>
+          <!-- Add more options as needed -->
+        </div>
+        <button type="submit" class="create-post-button">Tweet</button>
       </form>
     </div>
   </div>
@@ -507,6 +617,50 @@
         const loginJSON = window.localStorage.getItem("login-data");
         return JSON.parse(loginJSON) || {};
       }
+
+      function searchPostsByUsername(username) {
+        fetch(`${apiBaseURL}/posts?username=${username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((posts) => {
+            // Clear existing posts
+            profileContainer.innerHTML = "";
+            if (posts.length === 0) {
+              profileContainer.innerHTML = "<p>No posts found.</p>";
+              return;
+            }
+            posts.forEach((post) => {
+              const postDiv = document.createElement("div");
+              postDiv.className = "post";
+
+              const postHeader = document.createElement("div");
+              postHeader.className = "post-header";
+              postHeader.innerHTML = `<strong>@${post.username}</strong> <span>${new Date(post.createdAt).toLocaleString()}</span>`;
+              postDiv.appendChild(postHeader);
+
+              const postContent = document.createElement("div");
+              postContent.className = "post-content";
+              postContent.innerHTML = post.text;
+              postDiv.appendChild(postContent);
+
+              profileContainer.appendChild(postDiv);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching posts:", error);
+            profileContainer.innerHTML = "<p>Error loading posts.</p>";
+          });
+      }
+
+      searchButton.addEventListener("click", () => {
+        const username = searchInput.value.trim();
+        if (username) {
+          searchPostsByUsername(username);
+        }
+      });
 
       // Events
       createPostButton.onclick = toggleModal;

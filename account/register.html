@@ -4,180 +4,243 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Global CSS (CSS rules you want applied to all pages) -->
-    <link rel="stylesheet" href="./global.css" />
-
-    <!-- Page-specific CSS -->
-    <link rel="stylesheet" href="register.css" />
-
     <title>Register - Microblog Network</title>
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./register.css" />
     <style>
-      /* global.css */
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #e91e63, #2196f3);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .container {
-        background-color: #1a1a1a;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        width: 90%;
-        max-width: 400px;
-        text-align: center;
-      }
-
-      h1 {
-        color: white;
-      }
-
-      p,
-      a {
-        color: #bbb;
-        margin: 10px 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: #64b5f6;
-      }
-
-      a:hover {
-        color: #90caf9;
-      }
-
-      input[type="text"],
-      input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #64b5f6;
-        border-radius: 5px;
-        background-color: #333;
-        color: #fff;
-      }
-
-      button {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #64b5f6;
-        border-radius: 5px;
-        background-color: #64b5f6;
-        color: white;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #90caf9;
-      }
-
-      #togglePassword {
-        background-color: #333;
-        border: 1px solid #64b5f6;
-        color: #fff;
-        padding: 10px;
-        margin-left: 10px;
-      }
-
-      #togglePassword:hover {
-        background-color: #555;
-      }
-
-      /* register.css */
-      .form-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .form-group {
-        width: 100%;
-      }
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #1a1a1b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #d7dadc;
+        }
+        .container {
+            background-color: #272729;
+            width: 750px;
+            height: 500px;
+            display: flex;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 1rem;
+        }
+        .register-box {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .register-box h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .register-box form {
+            display: flex;
+            flex-direction: column;
+        }
+        .register-box input {
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #474748;
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: #333335;
+            color: #d7dadc;
+            position: relative;
+        }
+        .password-container {
+            position: relative;
+        }
+        .password-container input {
+            padding-right: 3rem;
+        }
+        .password-container .toggle-password {
+          position: absolute;
+            left: 17rem;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 15px;
+            background-color: #0079d3;
+            color: #d7dadc;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+        }
+        .password-container .toggle-password.show {
+            display: block;
+        }
+        .register-box button {
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background-color: #0079d3;
+            color: #d7dadc;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .register-box a {
+            text-align: right;
+            color: #0079d3;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .photo-container {
+            flex: 1;
+            background: linear-gradient(135deg, #0079d3, #0079d3);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 40px;
+        }
+        .photo-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .photo-container p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .photo-container button {
+            padding: 15px 30px;
+            border: 1px solid #d7dadc;
+            border-radius: 30px;
+            background: transparent;
+            color: #d7dadc;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #0079d3;
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .remember-me input {
+            margin-right: 10px;
+        }
     </style>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   </head>
   <body>
-    <main>
-      <div class="container">
-        <div class="form-section">
-          <h1>Register</h1>
-          <p>Please enter your details to create an account</p>
-          <form id="register">
-            <div class="form-group">
-              <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" placeholder="Full Name" required />
-            </div>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" minlength="3" placeholder="Username" required />
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" minlength="3" placeholder="Password" required />
-            </div>
-            <button id="registerButton" type="submit">Sign Up</button>
-          </form>
+    <div class="container">
+        <div class="register-box">
+            <h1>Register</h1>
+            <p>Please enter your details to create an account</p>
+            <form id="register">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Full Name" required />
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" minlength="3" placeholder="Username" required />
+                </div>
+                <div class="password-container">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" minlength="3" placeholder="Password" required />
+                    <button type="button" id="showPassword" class="toggle-password show"><i class="fas fa-eye"></i></button>
+                    <button type="button" id="hidePassword" class="toggle-password"><i class="fas fa-eye-slash"></i></button>
+                </div>
+                <button id="registerButton" type="submit">Sign Up</button>
+            </form>
         </div>
-      </div>
-    </main>
+        <div class="photo-container">
+            <h2>Join Us!</h2>
+            <p>Create your account and start sharing your thoughts with the world.</p>
+            <button onclick="window.location.href='login.html'">Login</button>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
 
     <script>
-      "use strict";
-      document.addEventListener("DOMContentLoaded", () => {
-        const registerButton = document.querySelector("#registerButton");
+        "use strict";
+        document.addEventListener("DOMContentLoaded", () => {
+            const showPasswordButton = document.getElementById('showPassword');
+            const hidePasswordButton = document.getElementById('hidePassword');
+            const passwordInput = document.getElementById('password');
 
-        registerButton.addEventListener("click", (event) => {
-          event.preventDefault();
+            showPasswordButton.addEventListener('click', () => {
+                passwordInput.setAttribute('type', 'text');
+                showPasswordButton.classList.remove('show');
+                hidePasswordButton.classList.add('show');
+            });
 
-          let usernameCreated = document.querySelector("#username").value;
-          let passwordCreated = document.querySelector("#password").value;
-          let fullNameCreated = document.querySelector("#fullName").value;
+            hidePasswordButton.addEventListener('click', () => {
+                passwordInput.setAttribute('type', 'password');
+                hidePasswordButton.classList.remove('show');
+                showPasswordButton.classList.add('show');
+            });
 
-          if (!usernameCreated || !passwordCreated || !fullNameCreated) {
-            alert("All fields are required.");
-            return;
-          }
+            const registerButton = document.querySelector("#registerButton");
 
-          let createNewUser = {
-            fullName: fullNameCreated,
-            username: usernameCreated,
-            password: passwordCreated,
-          };
+            registerButton.addEventListener("click", (event) => {
+                event.preventDefault();
 
-          let requestInit = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(createNewUser),
-          };
+                let usernameCreated = document.querySelector("#username").value;
+                let passwordCreated = document.querySelector("#password").value;
+                let fullNameCreated = document.querySelector("#fullName").value;
 
-          function saveNewData() {
-            fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users", requestInit)
-              .then((response) => {
-                if (response.ok) {
-                  window.location.href = "login.html";
-                } else {
-                  return response.json().then((data) => {
-                    throw new Error(data.message || "Registration failed");
-                  });
+                if (!usernameCreated || !passwordCreated || !fullNameCreated) {
+                    alert("All fields are required.");
+                    return;
                 }
-              })
-              .catch((error) => {
-                alert("Registration failed: " + error.message);
-              });
-          }
 
-          saveNewData();
+                let createNewUser = {
+                    fullName: fullNameCreated,
+                    username: usernameCreated,
+                    password: passwordCreated,
+                };
+
+                let requestInit = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(createNewUser),
+                };
+
+                function saveNewData() {
+                    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users", requestInit)
+                        .then((response) => {
+                            if (response.ok) {
+                                window.location.href = "login.html";
+                            } else {
+                                return response.json().then((data) => {
+                                    throw new Error(data.message || "Registration failed");
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            alert("Registration failed: " + error.message);
+                        });
+                }
+
+                saveNewData();
+            });
         });
-      });
     </script>
   </body>
 </html>
