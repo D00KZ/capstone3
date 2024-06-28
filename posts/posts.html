@@ -369,8 +369,8 @@
     </div>
     <div class="header-right">
       <nav>
-        <a href="../posts/index.html">Home</a>
         <a href="../profile.html">Profile</a>
+        <a href="#" id="logoutLink">Logout</a>
       </nav>
     </div>
   </header>
@@ -424,7 +424,6 @@
     "use strict";
 
     window.onload = function () {
-      // HTML element variables
       const createPostButton = document.querySelector("#createPostButton");
       const createPostModal = document.querySelector("#createPostModal");
       const displayUsersPost = document.querySelector("#displayUsersPost");
@@ -432,12 +431,14 @@
       const recentPostsList = document.querySelector("#recentPostsList");
       const loginData = getLoginData();
       const createPostForm = document.getElementById("createPostForm");
+      const logoutLink = document.getElementById("logoutLink");
+      const searchButton = document.getElementById("searchButton");
+      const searchInput = document.getElementById("searchInput");
 
       const token = loginData.token;
-      const loggedInUser = loginData.username; // Store logged-in username
+      const loggedInUser = loginData.username;
       const apiBaseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts";
 
-      // Functions
       function loadingUsersPosts() {
         fetch(apiBaseURL, {
           headers: {
@@ -453,29 +454,25 @@
           .then((posts) => {
             displayUsersPost.innerHTML = '';
             for (const post of posts) {
-              // Create a new div for the post
               let postDiv = document.createElement("div");
               postDiv.className = "post";
+              postDiv.dataset.postId = post._id;
 
-              // Create and populate the header
               let headerDiv = document.createElement("div");
               headerDiv.className = "post-header";
               headerDiv.innerHTML = `<img src="https://via.placeholder.com/30" alt="User Avatar" /> <span class="username">${post.username}</span> <span class="time">${new Date(post.createdAt).toLocaleTimeString()}</span>`;
               postDiv.appendChild(headerDiv);
 
-              // Create and populate the post title
               let titleDiv = document.createElement("div");
               titleDiv.className = "post-title";
-              titleDiv.innerText = "Post Title"; // Add the post title here if available
+              titleDiv.innerText = "Post Title"; 
               postDiv.appendChild(titleDiv);
 
-              // Create and populate the post content
               let contentDiv = document.createElement("div");
               contentDiv.className = "post-main";
               contentDiv.innerText = `${post.text}`;
               postDiv.appendChild(contentDiv);
 
-              // Like button and count
               let likeButton = document.createElement("button");
               likeButton.className = "like-button";
               likeButton.innerText = "Like";
@@ -492,7 +489,6 @@
               likeContainer.appendChild(likeCount);
               postDiv.appendChild(likeContainer);
 
-              // Add delete button if the post belongs to the logged-in user
               if (post.username === loggedInUser) {
                 let deleteButton = document.createElement("button");
                 deleteButton.className = "delete-button";
@@ -503,7 +499,6 @@
                 postDiv.appendChild(deleteButton);
               }
 
-              // Append the post to the container
               displayUsersPost.appendChild(postDiv);
             }
           })
@@ -527,7 +522,7 @@
           })
           .then((posts) => {
             recentPostsList.innerHTML = '';
-            for (const post of posts.slice(0, 10)) { // Display only the 10 most recent posts
+            for (const post of posts.slice(0, 10)) { 
               let listItem = document.createElement("li");
               listItem.innerHTML = `<a href="#">${post.text.substring(0, 30)}...</a>`;
               recentPostsList.appendChild(listItem);
@@ -559,7 +554,6 @@
             return response.json();
           })
           .then((updatedPost) => {
-            // Update the like count element with the new like count
             likeCountElement.innerText = updatedPost.likes.length;
           })
           .catch((error) => {
@@ -580,7 +574,6 @@
             if (!response.ok) {
               throw new Error("Network response was not ok");
             }
-            // Remove the post element from the UI
             postElement.remove();
           })
           .catch((error) => {
@@ -608,7 +601,7 @@
           .then((response) => response.json())
           .then((data) => {
             alert("Post created successfully!");
-            window.location.assign("posts.html"); // redirect to posts page
+            window.location.assign("posts.html"); 
           })
           .catch((error) => console.error("Error creating post:", error));
       });
@@ -626,7 +619,6 @@
         })
           .then((response) => response.json())
           .then((posts) => {
-            // Clear existing posts
             profileContainer.innerHTML = "";
             if (posts.length === 0) {
               profileContainer.innerHTML = "<p>No posts found.</p>";
@@ -662,7 +654,11 @@
         }
       });
 
-      // Events
+      logoutLink.addEventListener("click", () => {
+        window.localStorage.removeItem("login-data");
+        window.location.replace("../account/login.html");
+      });
+
       createPostButton.onclick = toggleModal;
       closeModal.onclick = toggleModal;
 

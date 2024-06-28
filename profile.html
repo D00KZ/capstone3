@@ -6,240 +6,265 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/global.css" />
   <title>Profile - Microblog Network</title>
-    <!-- Run BEFORE page is finished loading (before window.onload): -->
-    <script src="../account/auth.js"></script>
-    <script>
-      if (!isLoggedIn()) {
-        window.location.replace("../account/login.html");
-      }
-    </script>
+  <!-- Run BEFORE page is finished loading (before window.onload): -->
+  <script src="../account/auth.js"></script>
+  <script>
+    if (!isLoggedIn()) {
+      window.location.replace("../account/login.html");
+    }
+  </script>
   <style>
-     body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1b;
-    color: #d7dadc;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal overflow */
-  }
-  header {
-    background-color: #272729;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  header h1 {
-    color: #d7dadc;
-    margin: 0;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-  }
-  nav a {
-    color: #d7dadc;
-    margin-right: 15px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  nav a:hover {
-    color: #fff;
-  }
-
-  .header-left, .header-right {
-    display: flex;
-    align-items: center;
-  }
-  .header-center {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-  }
-  .search-bar {
-    display: flex;
-    align-items: center;
-  }
-  .search-bar input {
-    padding: 8px;
-    border: 1px solid #343536;
-    border-radius: 4px;
-    background-color: #1a1a1b;
-    color: #d7dadc;
-    margin-right: 10px;
-  }
-  .search-bar button {
-    padding: 8px 16px;
-    background-color: #d7dadc;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #1a1a1b;
-    font-weight: bold;
-  }
-  .search-bar button:hover {
-    background-color: #818384;
-  }
-  main {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    flex-grow: 1;
-  }
-  #profileContainer {
-    background: #272729;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box; /* Ensure padding is included in width */
-  }
-  .profileHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .profileHeader img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-  }
-  .profileHeader div {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .fullNameContainer {
-    display: flex;
-    flex-direction: column;
-  }
-  .username {
-    font-size: 16px;
-    color: #a3a3a3;
-  }
-  .profileInfo {
-    display: flex;
-    flex-direction: column;
-  }
-  .profileInfo div {
-    margin-bottom: 10px;
-  }
-  .post {
-    background: #1a1a1b;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-
-   footer {
-    background-color: #272729;
-    color: #888;
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #343536;
-    width: 100%;
-    bottom: 0;
-  }
-
-  .sidebar {
-    background: #272729;
-    border-radius: 8px;
-    padding: 20px;
-    width: 250px; /* Adjusted width */
-    margin-right: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .sidebar .avatar {
-    background-color: #1a1a1b;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .sidebar .avatar img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-  }
-  .sidebar .usernameSidebarDisplay {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .sidebar .totalLikes, .sidebar .totalPosts {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  .sidebar .settings {
-    margin-top: 20px;
-    width: 100%;
-  }
-  .sidebar .settings button {
-    background-color: #d7dadc; /* Updated to new color */
-    border: none;
-    color: #1a1a1b;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .sidebar .settings button:last-child {
-    margin-bottom: 0;
-  }
-  .form-input {
-    margin-bottom: 10px;
-    display: none;
-  }
-  .form-input input, .form-input textarea {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #343536;
-    background-color: #1a1a1b;
-    color: #d7dadc;
-  }
-  .form-input textarea {
-    resize: none;
-  }
-  .confirm-button {
-    display: none;
-    background-color: #d7dadc;
-    border: none;
-    color: #1a1a1b;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-
-  /* Updated text box styles */
-  input[type="text"], textarea {
-    font-size: 16px;
-    line-height: 1.5;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #343536;
-    border-radius: 8px;
-    background-color: #1a1a1b;
-    color: #d7dadc;
-    transition: border-color 0.3s;
-  }
-  input[type="text"]:focus, textarea:focus {
-    border-color: #d7dadc;
-    outline: none;
-  }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal overflow */
+    }
+    header {
+      background-color: #272729;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    header h1 {
+      color: #d7dadc;
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      color: #d7dadc;
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .header-center {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    .search-bar input {
+      padding: 8px;
+      border: 1px solid #343536;
+      border-radius: 4px;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+      margin-right: 10px;
+    }
+    .search-bar button {
+      padding: 8px 16px;
+      background-color: #d7dadc;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #1a1a1b;
+      font-weight: bold;
+    }
+    .search-bar button:hover {
+      background-color: #818384;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      flex-grow: 1;
+    }
+    #profileContainer {
+      background: #272729;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box; /* Ensure padding is included in width */
+      margin-bottom: 20px; /* Added margin for spacing */
+    }
+    .profileHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profileHeader img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+    }
+    .profileHeader div {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .fullNameContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    .username {
+      font-size: 16px;
+      color: #a3a3a3;
+    }
+    .profileInfo {
+      display: flex;
+      flex-direction: column;
+    }
+    .profileInfo div {
+      margin-bottom: 10px;
+    }
+    .post {
+      background: #1a1a1b;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    footer {
+      background-color: #272729;
+      color: #888;
+      text-align: center;
+      padding: 10px;
+      border-top: 1px solid #343536;
+      width: 100%;
+      bottom: 0;
+    }
+    .sidebar {
+      background: #272729;
+      border-radius: 8px;
+      padding: 20px;
+      width: 250px; /* Adjusted width */
+      margin-right: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px; /* Added margin for spacing */
+    }
+    .sidebar .avatar {
+      background-color: #1a1a1b;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sidebar .avatar img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+    .sidebar .usernameSidebarDisplay {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .sidebar .totalLikes, .sidebar .totalPosts {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .sidebar .settings {
+      margin-top: 20px;
+      width: 100%;
+    }
+    .sidebar .settings button {
+      background-color: #d7dadc; /* Updated to new color */
+      border: none;
+      color: #1a1a1b;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .sidebar .settings button:last-child {
+      margin-bottom: 0;
+    }
+    .form-input {
+      margin-bottom: 10px;
+      display: none;
+    }
+    .form-input input, .form-input textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #343536;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+    }
+    .form-input textarea {
+      resize: none;
+    }
+    .confirm-button {
+      display: none;
+      background-color: #d7dadc;
+      border: none;
+      color: #1a1a1b;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    /* Updated text box styles */
+    input[type="text"], textarea {
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #343536;
+      border-radius: 8px;
+      background-color: #1a1a1b;
+      color: #d7dadc;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #d7dadc;
+      outline: none;
+    }
+    #userPostsContainer {
+      background: #272729;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+    #userPostsContainer h2 {
+      margin-top: 0;
+      color: #d7dadc;
+    }
+    .userPost {
+      background: #1a1a1b;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .userPost .postHeader {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .userPost .postContent {
+      color: #d7dadc;
+    }
   </style>
 </head>
 <body>
@@ -255,12 +280,11 @@
     </div>
     <div class="header-right">
       <nav>
-        <a href="../posts/index.html">Home</a>
         <a href="../profile.html">Profile</a>
+        <a href="#" id="logoutLink">Logout</a>
       </nav>
     </div>
   </header>
-
   <main>
     <div class="sidebar" id="sidebar">
       <div class="avatar"><img src="https://via.placeholder.com/60" alt="Avatar" /></div>
@@ -273,19 +297,20 @@
         <button class="confirm-button" id="confirmButton">Confirm</button>
       </div>
     </div>
-    <div id="profileContainer">
-      <div class="profileHeader">
-        <div class="fullNameContainer">
+    <div>
+      <div id="profileContainer">
+        <div class="profileHeader">
+          <div class="fullNameContainer"></div>
         </div>
+        <div class="profileInfo"></div>
       </div>
-      <div class="profileInfo">
+      <div id="userPostsContainer">
+        <h2>User Posts</h2>
+        <div id="userPosts"></div>
       </div>
     </div>
   </main>
-
- <footer>&copy; 2024 Microblog Network</footer>
-
-  <script src="../account/auth.js"></script>
+  <footer>&copy; 2024 Microblog Network</footer>
   <script>
     window.onload = function () {
       const loginData = getLoginData();
@@ -301,6 +326,7 @@
       const confirmButton = document.getElementById("confirmButton");
       const searchButton = document.getElementById("searchButton");
       const searchInput = document.getElementById("searchInput");
+      const logoutLink = document.getElementById("logoutLink");
 
       function loadingUserProfile() {
         fetch(`${apiBaseURL}/users/${loginData.username}`, {
@@ -467,6 +493,11 @@
         }
       });
 
+      logoutLink.addEventListener("click", () => {
+        window.localStorage.removeItem("login-data");
+        window.location.replace("../account/login.html");
+      });
+
       function getUserTotalLikes() {
         fetch(`${apiBaseURL}/users/${loginData.username}/likes`, {
           headers: {
@@ -504,9 +535,47 @@
         return JSON.parse(loginJSON) || {};
       }
 
+      function loadUserPosts() {
+        fetch(`${apiBaseURL}/posts?username=${loginData.username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(response => response.json())
+        .then(posts => {
+          const userPostsContainer = document.getElementById("userPosts");
+          if (posts.length === 0) {
+            userPostsContainer.innerHTML = "<p>No posts available.</p>";
+            return;
+          }
+          posts.forEach(post => {
+            const postDiv = document.createElement("div");
+            postDiv.className = "userPost";
+
+            const postHeader = document.createElement("div");
+            postHeader.className = "postHeader";
+            postHeader.innerHTML = `@${post.username} <span>${new Date(post.createdAt).toLocaleString()}</span>`;
+            postDiv.appendChild(postHeader);
+
+            const postContent = document.createElement("div");
+            postContent.className = "postContent";
+            postContent.innerHTML = post.text;
+            postDiv.appendChild(postContent);
+
+            userPostsContainer.appendChild(postDiv);
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching user posts:", error);
+          const userPostsContainer = document.getElementById("userPosts");
+          userPostsContainer.innerHTML = "<p>Error loading posts.</p>";
+        });
+      }
+
       loadingUserProfile();
       getUserTotalLikes();
       getUserTotalPosts();
+      loadUserPosts(); // Call the function to load user posts
     };
   </script>
 </body>
